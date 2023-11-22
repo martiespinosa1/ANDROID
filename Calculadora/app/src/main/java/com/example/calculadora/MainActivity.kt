@@ -61,13 +61,13 @@ fun Body() {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Text(text = "Calculadora", fontSize = 28.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Calculadora\n", fontSize = 28.sp, fontWeight = FontWeight.Bold)
         TextField(value = num1, onValueChange = { num1 = it }, label = { Text("Num 1") })
         TextField(value = num2, onValueChange = { num2 = it }, label = { Text("Num 2") })
 
-
+        Text(text = "", fontSize = 20.sp)
         val op = myDropDownMenu()
-
+        Text(text = "", fontSize = 20.sp)
 
         Button(onClick = { show = true }) {
             Text(text = "Calcular")
@@ -75,11 +75,11 @@ fun Body() {
 
         if (show) {
             var result = 0
-            when {
-                op == "Suma" -> result = num1.toInt() + num2.toInt()
-                op == "Resta" -> result = num1.toInt() - num2.toInt()
-                op == "Multiplicación" -> result = num1.toInt() * num2.toInt()
-                op == "División" -> result = num1.toInt() / num2.toInt()
+            when (op) {
+                "Suma" -> result = num1.toInt() + num2.toInt()
+                "Resta" -> result = num1.toInt() - num2.toInt()
+                "Multiplicación" -> result = num1.toInt() * num2.toInt()
+                "División" -> result = num1.toInt() / num2.toInt()
             }
 
             Text (text = "Resultado: $result", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Green)
@@ -107,9 +107,8 @@ fun myDropDownMenu(): String {
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = { expanded = false },
-        modifier = Modifier.fillMaxWidth()
     ) {
-        options.forEach { it ->
+        options.forEach {
             DropdownMenuItem(text = { Text(text = it) }, onClick = {
                 expanded = false
                 operacion = it
