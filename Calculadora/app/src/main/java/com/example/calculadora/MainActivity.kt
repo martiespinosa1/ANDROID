@@ -66,7 +66,7 @@ fun Body() {
         TextField(value = num2, onValueChange = { num2 = it }, label = { Text("Num 2") })
 
         Text(text = "", fontSize = 20.sp)
-        val op = myDropDownMenu()
+        val op = myCalculator()
         Text(text = "", fontSize = 20.sp)
 
         Button(onClick = { show = true }) {
@@ -89,7 +89,7 @@ fun Body() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun myDropDownMenu(): String {
+fun myCalculator(): String {
     var operacion by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val options = listOf("Suma", "Resta", "Multiplicación", "División")
