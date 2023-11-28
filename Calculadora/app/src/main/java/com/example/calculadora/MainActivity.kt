@@ -1,6 +1,7 @@
 package com.example.calculadora
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -27,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -70,19 +73,22 @@ fun Body() {
         Text(text = "", fontSize = 20.sp)
 
         Button(onClick = { show = true }) {
-            Text(text = "Calcular")
+            Text(text = "Calcular", fontSize = 18.sp)
         }
 
         if (show) {
             var result = 0
-            when (op) {
-                "Suma" -> result = num1.toInt() + num2.toInt()
-                "Resta" -> result = num1.toInt() - num2.toInt()
-                "Multiplicación" -> result = num1.toInt() * num2.toInt()
-                "División" -> result = num1.toInt() / num2.toInt()
-            }
+            if (op == "División" && num2 == "0") Toast.makeText(LocalContext.current, "No se puede dividir entre 0", Toast.LENGTH_SHORT).show()
+            else {
+                when (op) {
+                    "Suma" -> result = num1.toInt() + num2.toInt()
+                    "Resta" -> result = num1.toInt() - num2.toInt()
+                    "Multiplicación" -> result = num1.toInt() * num2.toInt()
+                    "División" -> result = num1.toInt() / num2.toInt()
+                }
 
-            Text (text = "Resultado: $result", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Green)
+                Text (text = "\nResultado: $result", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Green)
+            }
         }
     }
 }
@@ -90,7 +96,7 @@ fun Body() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun myCalculator(): String {
-    var operacion by remember { mutableStateOf("") }
+    var operacion by remember { mutableStateOf("Suma") }
     var expanded by remember { mutableStateOf(false) }
     val options = listOf("Suma", "Resta", "Multiplicación", "División")
 
@@ -101,7 +107,7 @@ fun myCalculator(): String {
         readOnly = true,
         modifier = Modifier
             .clickable { expanded = true }
-            .fillMaxWidth()
+            .width(280.dp)
     )
 
     DropdownMenu(
