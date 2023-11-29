@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.diceroller.ui.theme.DiceRollerTheme
+import java.util.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,8 +78,8 @@ fun Body() {
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
             shape = RoundedCornerShape(5.dp),
             modifier = Modifier
-                .padding(top = 50.dp)
-                .size(width = 300.dp, height = 50.dp)
+                .padding(top = 100.dp)
+                .size(width = 350.dp, height = 50.dp)
         ) {
             Text(
                 text = "ROLL THE DICE",
@@ -86,9 +89,47 @@ fun Body() {
             )
 
         }
-    }
 
+        if (show) {
+            val diceArray = arrayOf(R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6)
+
+            val random = Random()
+
+            val randomIndex1 = random.nextInt(diceArray.size)
+            val randomImage1 = diceArray[randomIndex1]
+
+            val randomIndex2 = random.nextInt(diceArray.size)
+            val randomImage2 = diceArray[randomIndex2]
+
+            R.drawable.dice_1 = randomImage1
+            R.drawable.dice_2 = randomImage2
+
+            show = false
+        }
+
+        Row () {
+            Image(
+                painter = painterResource(id = R.drawable.dice_1),
+                contentDescription = "dado1",
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(top = 75.dp)
+                    .clickable { }
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.dice_2),
+                contentDescription = "dado2",
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(top = 75.dp)
+                    .clickable { }
+            )
+        }
+
+    }
 }
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
