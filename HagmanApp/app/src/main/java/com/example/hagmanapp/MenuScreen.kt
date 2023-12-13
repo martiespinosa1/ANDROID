@@ -1,5 +1,6 @@
 package com.example.hagmanapp
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,16 +44,16 @@ fun Menu(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Magenta)) {
+            .background(Color.Gray)) {
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.08f)
                 .align(Alignment.TopCenter)
-                .background(Color.Blue)) {
+                .background(Color.DarkGray)) {
             Text(
-                text = "MyForm",
+                text = "Hangman App",
                 modifier = Modifier
                     .padding(start = 15.dp, top = 16.dp),
                 style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold)
@@ -74,42 +76,10 @@ fun Menu(navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                RadioButton(
-                    selected = firstOptionSelected,
-                    onClick = {
-                        firstOptionSelected = true
-                        secondOptionSelected = false
-                    }
-                )
-                Text(text = "Hello")
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                RadioButton(
-                    selected = secondOptionSelected,
-                    onClick = {
-                        firstOptionSelected = false
-                        secondOptionSelected = true
-                    }
-                )
-                Text(text = "Bye   ")
+                Image(painter = painterResource(id = R.drawable.logo),
+                    contentDescription = "logo")
             }
 
-            Slider(
-                value = sliderValue,
-                onValueChange = { newValue ->
-                    sliderValue = newValue
-                },
-            )
-            Text(
-                text = sliderValue.toString(),
-                modifier = Modifier.padding(top = 8.dp)
-            )
         }
 
 
@@ -120,7 +90,7 @@ fun Menu(navController: NavController) {
                 .fillMaxHeight(0.08f)
                 .align(Alignment.BottomCenter)
                 .clickable { navController.navigate(Routes.Game.route) }
-                .background(Color.Blue)) {
+                .background(Color.DarkGray)) {
             Text(
                 text = "NEXT STEP",
                 modifier = Modifier
