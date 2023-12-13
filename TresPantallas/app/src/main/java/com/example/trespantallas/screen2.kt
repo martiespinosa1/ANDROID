@@ -112,7 +112,7 @@ fun Screen2(navController: NavController) {
             )
         }
 
-            
+
 
         Box(
             modifier = Modifier
