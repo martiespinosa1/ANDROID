@@ -1,17 +1,31 @@
 package com.example.hagmanapp
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,42 +37,51 @@ import com.example.hagmanapp.ui.theme.HagmanAppTheme
 
 @Composable
 fun Game(navController: NavController) {
-    Box(
+    val abcdario = remember { mutableStateListOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
+
+    Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Green)) {
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.08f)
-                .align(Alignment.TopCenter)
-                .background(Color.Blue)) {
-            Text(
-                text = "MyForm",
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        var index = -1
+        for (i in 1..5) {
+            Row(
                 modifier = Modifier
-                    .padding(start = 15.dp, top = 16.dp),
-                style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            )
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.08f)
-                .align(Alignment.BottomCenter)
-                .clickable { navController.navigate(Routes.Result.route) }
-                .background(Color.Blue)) {
-            Text(
-                text = "SHARE",
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .clickable { navController.navigate(Routes.Result.createRoute(121)) },
-                style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            )
+                    .fillMaxWidth()
+                    .padding(5.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                if (i < 5) {
+                    for (j in 1..6) {
+                        index++
+                        OutlinedButton(
+                            onClick = { },
+                            modifier = Modifier.size(60.dp)
+                        ) {
+                            Text(text = abcdario[index], fontSize = 16.sp)
+                        }
+                    }
+                } else {
+                    for (j in 1..3) {
+                        index++
+                        OutlinedButton(
+                            onClick = { },
+                            modifier = Modifier.size(60.dp)
+                        ) {
+                            Text(text = abcdario[index], fontSize = 16.sp)
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
