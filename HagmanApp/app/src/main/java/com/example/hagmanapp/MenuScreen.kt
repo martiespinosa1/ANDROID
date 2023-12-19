@@ -1,5 +1,6 @@
 package com.example.hagmanapp
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -50,13 +51,12 @@ import com.example.hagmanapp.ui.theme.HagmanAppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Menu(navController: NavController) {
-    var firstOptionSelected by remember { mutableStateOf(false) }
-    var secondOptionSelected by remember { mutableStateOf(false) }
-    var sliderValue by remember { mutableStateOf(0f) }
-
-    var selectedText by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val difficulty = listOf("Easy", "Medium", "Hard")
+    var selectedText by remember { mutableStateOf(difficulty[1]) }
+    var selectedDifficulty by remember {
+        mutableStateOf("hola")
+    }
 
     var showDialog by remember { mutableStateOf(false) }
 
@@ -76,7 +76,9 @@ fun Menu(navController: NavController) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "logo",
-                modifier = Modifier.requiredSize(200.dp).clip(shape = RoundedCornerShape(30.dp))
+                modifier = Modifier
+                    .requiredSize(200.dp)
+                    .clip(shape = RoundedCornerShape(30.dp))
             )
         }
 
@@ -101,13 +103,14 @@ fun Menu(navController: NavController) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 difficulty.forEach {
-                    DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                        expanded = false
-                        selectedText = it
+                    DropdownMenuItem(text = { Text(text = it) },
+                        onClick = {
+                            expanded = false
+                            selectedDifficulty = it
                     })
                 }
             }
-
+            selectedText = "hola"
         }
 
         Row(
@@ -118,7 +121,7 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedButton(
-                onClick = { navController.navigate(Routes.Game.route) },
+                onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty))},
                 modifier = Modifier.requiredWidth(280.dp)
             ){
                 Text(text = "Play", fontSize = 20.sp)
@@ -157,7 +160,8 @@ fun MyDialog(show: Boolean, onDismiss: () -> Unit, function: () -> Unit) {
             )
         ) {
             Column(
-                Modifier.background(Color.DarkGray)
+                Modifier
+                    .background(Color.DarkGray)
                     .padding(24.dp)
             ) {
                 Text(text = "This is my dialog", color = Color.Blue)
@@ -170,10 +174,4 @@ fun MyDialog(show: Boolean, onDismiss: () -> Unit, function: () -> Unit) {
 
 
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun GreetingPreview2() {
-    HagmanAppTheme {
-        Menu(navController = rememberNavController())
-    }
-}
+

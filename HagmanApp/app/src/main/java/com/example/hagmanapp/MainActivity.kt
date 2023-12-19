@@ -33,7 +33,15 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Routes.Splash.route) { SplashScreen(navigationController) }
                         composable(Routes.Menu.route) { Menu(navigationController) }
-                        composable(Routes.Game.route) { Game(navigationController) }
+                        composable(Routes.Game.route,
+                            arguments = listOf(navArgument("selectedDifficulty") {type = NavType.StringType})
+                        ) {
+                                backStackEntry ->
+                            Game(
+                                navigationController,
+                                backStackEntry.arguments?.getString("selectedDifficulty").orEmpty()
+                            )
+                        }
                         composable(
                             Routes.Result.route,
                             arguments = listOf(navArgument("secretNumber") {type = NavType.IntType})
