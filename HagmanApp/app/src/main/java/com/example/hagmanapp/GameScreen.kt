@@ -3,19 +3,27 @@ package com.example.hagmanapp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -99,10 +107,10 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         )
     }
 
-    val randomWord = remember { mutableStateOf("") }
-    val palabraOculta = remember { mutableStateOf(generarPalabraOculta(selectedDifficulty)) }
+    var randomWord by remember { mutableStateOf("") }
+    var palabraOculta by remember { mutableStateOf(generarPalabraOculta(selectedDifficulty)) }
     val random = Random()
-    val attempts = remember { mutableStateOf(0) }
+    var attempts by remember { mutableStateOf(0) }
 
     Column(
         modifier = Modifier
@@ -111,28 +119,28 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val randomIndex: Int
-        val randomWordInitialized = remember { mutableStateOf(false) }
+        var randomWordInitialized by remember { mutableStateOf(false) }
 
-        if (!randomWordInitialized.value) {
+        if (!randomWordInitialized) {
             when (selectedDifficulty) {
                 "Easy" -> {
                     randomIndex = random.nextInt(palabras3Letras.size)
-                    randomWord.value = palabras3Letras[randomIndex]
+                    randomWord = palabras3Letras[randomIndex]
                 }
                 "Medium" -> {
                     randomIndex = random.nextInt(palabras4Letras.size)
-                    randomWord.value = palabras4Letras[randomIndex]
+                    randomWord = palabras4Letras[randomIndex]
                 }
                 "Hard" -> {
                     randomIndex = random.nextInt(palabras5Letras.size)
-                    randomWord.value = palabras5Letras[randomIndex]
+                    randomWord = palabras5Letras[randomIndex]
                 }
             }
-            randomWordInitialized.value = true
+            randomWordInitialized = true
         }
 
         Text(
-            text = palabraOculta.value,
+            text = palabraOculta,
             fontSize = 80.sp,
             modifier = Modifier.padding(bottom = 30.dp)
         )
@@ -159,18 +167,28 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                         index++
                         if (index < abcdario.size) {
                             val letra = abcdario[index]
-                            OutlinedButton(
+                            var isButtonEnabled by remember { mutableStateOf(true) }
+
+                            Button(
                                 onClick = {
-                                    attempts.value++
-                                    val letraEnPalabra = LetraEnPalabra(randomWord.value, letra)
-                                    if (letraEnPalabra) {
-                                        palabraOculta.value = ponerLetras(randomWord.value, palabraOculta.value, letra)
+                                    if (isButtonEnabled) {
+                                        attempts++
+                                        val letraEnPalabra = LetraEnPalabra(randomWord, letra)
+                                        if (letraEnPalabra) {
+                                            palabraOculta = ponerLetras(randomWord, palabraOculta, letra)
+                                        }
+                                        // Deshabilitar el botón después de hacer clic
+                                        isButtonEnabled = false
                                     }
                                 },
-                                modifier = Modifier.size(55.dp)
+                                modifier = Modifier.size(45.dp),
+                                shape = MaterialTheme.shapes.medium.copy(CornerSize(10.dp)),
+                                contentPadding = PaddingValues(0.dp),
+                                enabled = isButtonEnabled
                             ) {
-                                Text(text = letra, fontSize = 15.sp)
+                                Text(text = letra, fontSize = 15.sp, color = Color.DarkGray)
                             }
+                            if (j < 6) Spacer(modifier = Modifier.width(15.dp))
                         }
                     }
                 }
@@ -178,8 +196,9 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         }
 
 
+
         Text(
-            text = "ATTEMPTS: ${attempts.value}",
+            text = "ATTEMPTS: $attempts",
             fontSize = 24.sp,
             modifier = Modifier.padding(top = 15.dp)
         )
