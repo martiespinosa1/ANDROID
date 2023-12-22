@@ -53,10 +53,7 @@ import com.example.hagmanapp.ui.theme.HagmanAppTheme
 fun Menu(navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
     val difficulty = listOf("Easy", "Medium", "Hard")
-    var selectedText by remember { mutableStateOf(difficulty[1]) }
-    var selectedDifficulty by remember {
-        mutableStateOf("hola")
-    }
+    var selectedDifficulty by remember { mutableStateOf(difficulty[0]) }
 
     var showDialog by remember { mutableStateOf(false) }
 
@@ -90,8 +87,8 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedTextField(
-                value = selectedText,
-                onValueChange = { selectedText = it },
+                value = selectedDifficulty,
+                onValueChange = { selectedDifficulty = it },
                 enabled = false,
                 readOnly = true,
                 modifier = Modifier
@@ -110,7 +107,6 @@ fun Menu(navController: NavController) {
                     })
                 }
             }
-            selectedText = "hola"
         }
 
         Row(
