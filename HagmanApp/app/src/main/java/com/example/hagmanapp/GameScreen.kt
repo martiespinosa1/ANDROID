@@ -154,6 +154,9 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
         // CREACION DE LOS BOTONES (TECLAS)
         var index = -1
+        var isGameOver by remember { mutableStateOf(false) }
+        var showCongratsMessage by remember { mutableStateOf(false) }
+
         for (i in 1..26) {
             if (i % 6 == 1) {
                 Row(
@@ -171,12 +174,22 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
                             Button(
                                 onClick = {
-                                    if (isButtonEnabled) {
-                                        attempts++
+                                    if (isButtonEnabled && !isGameOver) {
                                         val letraEnPalabra = LetraEnPalabra(randomWord, letra)
                                         if (letraEnPalabra) {
                                             palabraOculta = ponerLetras(randomWord, palabraOculta, letra)
+                                            if (!palabraOculta.contains("_")) {
+                                                // El jugador ha adivinado la palabra
+                                                isGameOver = true
+                                                showCongratsMessage = true
+                                            }
+                                        } else {
+                                            attempts++
+                                            if (attempts == 9) {
+                                                isGameOver = true
+                                            }
                                         }
+
                                         // Deshabilitar el botón después de hacer clic
                                         isButtonEnabled = false
                                     }
@@ -195,10 +208,28 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             }
         }
 
+        // Mostrar mensaje de fin de juego si el jugador no adivina
+        if (isGameOver && attempts >= 9) {
+            Text(
+                text = "¡Has perdido! La palabra era: ${randomWord.uppercase()}",
+                fontSize = 24.sp,
+                color = Color.Red,
+                modifier = Modifier.padding(top = 15.dp)
+            )
+        }
 
+        // Mostrar mensaje de enhorabuena
+        if (showCongratsMessage) {
+            Text(
+                text = "¡Enhorabuena! Has adivinado la palabra.",
+                fontSize = 24.sp,
+                color = Color.Green,
+                modifier = Modifier.padding(top = 15.dp)
+            )
+        }
 
         Text(
-            text = "ATTEMPTS: $attempts",
+            text = "ERRORES: $attempts",
             fontSize = 24.sp,
             modifier = Modifier.padding(top = 15.dp)
         )
