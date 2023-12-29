@@ -17,7 +17,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.coroutines.delay
 import java.util.Random
 
 @Composable
@@ -110,7 +113,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var randomWord by remember { mutableStateOf("") }
     var palabraOculta by remember { mutableStateOf(generarPalabraOculta(selectedDifficulty)) }
     val random = Random()
-    var attempts by remember { mutableStateOf(0) }
+    var attempts by remember { mutableIntStateOf(0) }
 
     Column(
         modifier = Modifier
@@ -175,7 +178,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                             Button(
                                 onClick = {
                                     if (isButtonEnabled && !isGameOver) {
-                                        val letraEnPalabra = LetraEnPalabra(randomWord, letra)
+                                        val letraEnPalabra = letraEnPalabra(randomWord, letra)
                                         if (letraEnPalabra) {
                                             palabraOculta = ponerLetras(randomWord, palabraOculta, letra)
                                             if (!palabraOculta.contains("_")) {
@@ -208,24 +211,17 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             }
         }
 
-        // Mostrar mensaje de fin de juego si el jugador no adivina
-        if (isGameOver && attempts >= 9) {
-            Text(
-                text = "¡Has perdido! La palabra era: ${randomWord.uppercase()}",
-                fontSize = 24.sp,
-                color = Color.Red,
-                modifier = Modifier.padding(top = 15.dp)
-            )
-        }
+        // Fin de partida
+        if (isGameOver) {
+            LaunchedEffect(palabraOculta) {
+                delay(1000)
 
-        // Mostrar mensaje de enhorabuena
-        if (showCongratsMessage) {
-            Text(
-                text = "¡Enhorabuena! Has adivinado la palabra.",
-                fontSize = 24.sp,
-                color = Color.Green,
-                modifier = Modifier.padding(top = 15.dp)
-            )
+                // Determinar si el juego se ganó o se perdió
+                val hasWon = !palabraOculta.contains("_") && attempts < 9
+
+                // Navegar a ResultScreen con el resultado
+                navController.navigate(Routes.Result.createRoute(hasWon))
+            }
         }
 
         Text(
@@ -247,7 +243,7 @@ fun generarPalabraOculta(selectedDifficulty: String): String {
     }
 }
 
-fun LetraEnPalabra(palabraRandom: String, letra: String): Boolean {
+fun letraEnPalabra(palabraRandom: String, letra: String): Boolean {
     println(palabraRandom)
     println(letra)
     println(palabraRandom.contains(letra.lowercase()))
@@ -263,7 +259,7 @@ fun ponerLetras(palabra: String, palabraOculta: String, letra: String): String {
     }
     println("palabra: $palabra")
     println("letra: $letra")
-    println("palabraOculta actualizada: ${nuevaPalabraOculta}")
+    println("palabraOculta actualizada: $nuevaPalabraOculta")
     return nuevaPalabraOculta.toString()
 }
 

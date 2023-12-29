@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         composable(Routes.Splash.route) { SplashScreen(navigationController) }
                         composable(Routes.Menu.route) { Menu(navigationController) }
                         composable(Routes.Game.route,
-                            arguments = listOf(navArgument("selectedDifficulty") {type = NavType.StringType})
+                            arguments = listOf(navArgument("selectedDifficulty") { type = NavType.StringType })
                         ) {
                                 backStackEntry ->
                             Game(
@@ -42,12 +42,12 @@ class MainActivity : ComponentActivity() {
                                 backStackEntry.arguments?.getString("selectedDifficulty").orEmpty()
                             )
                         }
-                        composable(
-                            Routes.Result.route,
-                            arguments = listOf(navArgument("secretNumber") {type = NavType.IntType})
-                        ) { backStackEntry ->
+                        composable(Routes.Result.route,
+                            arguments = listOf(navArgument("hasWon") { type = NavType.BoolType })
+                        ) {
+                                backStackEntry ->
                             Result(
-                                navigationController
+                                backStackEntry.arguments?.getBoolean("hasWon") ?: false
                             )
                         }
                     }
