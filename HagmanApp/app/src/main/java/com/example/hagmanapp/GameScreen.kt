@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -115,6 +118,13 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     val random = Random()
     var attempts by remember { mutableIntStateOf(0) }
 
+    Image(
+        painter = painterResource(id = R.drawable.fondo),
+        contentDescription = "fondo",
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -155,6 +165,11 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             modifier = Modifier.requiredSize(200.dp)
         )
 
+        val buttonColor = ButtonDefaults.buttonColors(
+            containerColor = Color.DarkGray.copy(alpha = 0.8f),
+            contentColor = MaterialTheme.colorScheme.surface
+        )
+
         // CREACION DE LOS BOTONES (TECLAS)
         var index = -1
         var isGameOver by remember { mutableStateOf(false) }
@@ -175,7 +190,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                             val letra = abcdario[index]
                             var isButtonEnabled by remember { mutableStateOf(true) }
 
-                            Button(
+                            OutlinedButton(
                                 onClick = {
                                     if (isButtonEnabled && !isGameOver) {
                                         val letraEnPalabra = letraEnPalabra(randomWord, letra)
@@ -198,11 +213,12 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                     }
                                 },
                                 modifier = Modifier.size(45.dp),
+                                colors = buttonColor,
                                 shape = MaterialTheme.shapes.medium.copy(CornerSize(10.dp)),
                                 contentPadding = PaddingValues(0.dp),
                                 enabled = isButtonEnabled
                             ) {
-                                Text(text = letra, fontSize = 15.sp, color = Color.DarkGray)
+                                Text(text = letra, fontSize = 15.sp, color = Color.LightGray)
                             }
                             if (j < 6) Spacer(modifier = Modifier.width(15.dp))
                         }

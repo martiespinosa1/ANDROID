@@ -12,9 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -27,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,6 +46,14 @@ fun Menu(navController: NavController) {
     var selectedDifficulty by remember { mutableStateOf(difficulty[0]) }
 
     var showDialog by remember { mutableStateOf(false) }
+
+
+    Image(
+        painter = painterResource(id = R.drawable.fondo),
+        contentDescription = "fondo",
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop
+    )
 
     Column(
         modifier = Modifier
@@ -65,6 +77,12 @@ fun Menu(navController: NavController) {
             )
         }
 
+        val buttonColor = ButtonDefaults.buttonColors(
+            containerColor = Color.DarkGray.copy(alpha = 0.8f),
+            //contentColor = MaterialTheme.colorScheme.surface
+            contentColor = Color.LightGray
+        )
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -79,6 +97,7 @@ fun Menu(navController: NavController) {
                 readOnly = true,
                 modifier = Modifier
                     .clickable { expanded = true }
+                    .background(Color.DarkGray.copy(alpha = 0.8f), shape = RoundedCornerShape(16.dp))
             )
             DropdownMenu(
                 expanded = expanded,
@@ -86,7 +105,7 @@ fun Menu(navController: NavController) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 difficulty.forEach {
-                    DropdownMenuItem(text = { Text(text = it) },
+                    DropdownMenuItem(text = { Text(text = it)},
                         onClick = {
                             expanded = false
                             selectedDifficulty = it
@@ -94,6 +113,7 @@ fun Menu(navController: NavController) {
                 }
             }
         }
+
 
         Row(
             modifier = Modifier
@@ -104,7 +124,8 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty)) },
-                modifier = Modifier.requiredWidth(280.dp)
+                modifier = Modifier.requiredWidth(280.dp),
+                colors = buttonColor
             ){
                 Text(text = "Play", fontSize = 20.sp)
             }
@@ -119,7 +140,8 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { showDialog = true },
-                modifier = Modifier.requiredWidth(280.dp)
+                modifier = Modifier.requiredWidth(280.dp),
+                colors = buttonColor
             ){
                 Text(text = "Help", fontSize = 20.sp)
             }
@@ -143,10 +165,10 @@ fun MyDialog(show: Boolean, onDismiss: () -> Unit, function: () -> Unit) {
         ) {
             Column(
                 Modifier
-                    .background(Color.DarkGray)
+                    .background(Color.DarkGray.copy(alpha = 0.8f))
                     .padding(24.dp)
             ) {
-                Text(text = "This is my dialog", color = Color.Blue)
+                Text(text = "Selecciona la dificultad y dale a play", color = Color.LightGray)
             }
         }
     }
