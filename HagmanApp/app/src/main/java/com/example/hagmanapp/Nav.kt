@@ -6,7 +6,7 @@ sealed class Routes(val route: String) {
     object Game:Routes("GameScreen/{selectedDifficulty}") {
         fun createRoute(selectedDifficulty: String) = "GameScreen/$selectedDifficulty"
     }
-    object Result:Routes("ResultScreen/{hasWon}") {
-        fun createRoute(hasWon: Boolean) = "ResultScreen/$hasWon"
+    object Result:Routes("ResultScreen/{hasWon}/{palabra}/{fallos}/{diff}") {
+        fun createRoute(hasWon: Boolean, palabra: String, fallos: Int, diff: String) = "ResultScreen/$hasWon/$palabra/$fallos/$diff"
     }
 }

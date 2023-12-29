@@ -43,11 +43,19 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Routes.Result.route,
-                            arguments = listOf(navArgument("hasWon") { type = NavType.BoolType })
+                            arguments = listOf(
+                                navArgument("hasWon") { type = NavType.BoolType },
+                                navArgument("palabra") { type = NavType.StringType },
+                                navArgument("fallos") { type = NavType.IntType }
+                            )
                         ) {
                                 backStackEntry ->
                             Result(
-                                backStackEntry.arguments?.getBoolean("hasWon") ?: false
+                                navigationController,
+                                backStackEntry.arguments?.getBoolean("hasWon") ?: false,
+                                backStackEntry.arguments?.getString("palabra") ?: "",
+                                backStackEntry.arguments?.getInt("fallos") ?: 0,
+                                backStackEntry.arguments?.getString("diff") ?: "Medium"
                             )
                         }
                     }

@@ -117,7 +117,7 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedButton(
-                onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty))},
+                onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty)) },
                 modifier = Modifier.requiredWidth(280.dp)
             ){
                 Text(text = "Play", fontSize = 20.sp)

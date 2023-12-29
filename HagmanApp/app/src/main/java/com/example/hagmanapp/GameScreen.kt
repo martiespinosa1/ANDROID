@@ -220,7 +220,14 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                 val hasWon = !palabraOculta.contains("_") && attempts < 9
 
                 // Navegar a ResultScreen con el resultado
-                navController.navigate(Routes.Result.createRoute(hasWon))
+                navController.navigate(
+                    Routes.Result.createRoute(
+                        hasWon = hasWon,
+                        palabra = randomWord,
+                        fallos = attempts,
+                        diff = selectedDifficulty
+                    )
+                )
             }
         }
 
