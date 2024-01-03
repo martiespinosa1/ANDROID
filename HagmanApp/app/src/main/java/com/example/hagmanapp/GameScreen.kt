@@ -119,7 +119,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var attempts by remember { mutableIntStateOf(0) }
 
     Image(
-        painter = painterResource(id = R.drawable.fondo),
+        painter = painterResource(id = R.drawable.fondo2),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -160,8 +160,8 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
 
         Image(
-            painter = painterResource(id = R.drawable.persona),
-            contentDescription = "persona",
+            painter = painterResource(id = R.drawable.hang),
+            contentDescription = "hangman",
             modifier = Modifier.requiredSize(200.dp)
         )
 

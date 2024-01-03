@@ -49,7 +49,7 @@ fun Menu(navController: NavController) {
 
 
     Image(
-        painter = painterResource(id = R.drawable.fondo),
+        painter = painterResource(id = R.drawable.fondo2),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
