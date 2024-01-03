@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
@@ -32,6 +33,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -91,21 +95,21 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedTextField(
-                value = selectedDifficulty,
+                value = "Difficulty: $selectedDifficulty",
+                textStyle = TextStyle(fontFamily = customFontFamily1, fontSize = 25.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
                 onValueChange = { selectedDifficulty = it },
                 enabled = false,
                 readOnly = true,
                 modifier = Modifier
                     .clickable { expanded = true }
-                    .background(Color.DarkGray.copy(alpha = 0.8f), shape = RoundedCornerShape(16.dp))
+                    .background(Color.DarkGray.copy(alpha = 0.8f), shape = RoundedCornerShape(50.dp))
             )
             DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.fillMaxWidth()
+                onDismissRequest = { expanded = false }
             ) {
                 difficulty.forEach {
-                    DropdownMenuItem(text = { Text(text = it)},
+                    DropdownMenuItem(text = { Text(text = it, fontFamily = customFontFamily1)},
                         onClick = {
                             expanded = false
                             selectedDifficulty = it
@@ -127,7 +131,7 @@ fun Menu(navController: NavController) {
                 modifier = Modifier.requiredWidth(280.dp),
                 colors = buttonColor
             ){
-                Text(text = "Play", fontSize = 20.sp)
+                Text(text = "Play", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -143,7 +147,7 @@ fun Menu(navController: NavController) {
                 modifier = Modifier.requiredWidth(280.dp),
                 colors = buttonColor
             ){
-                Text(text = "Help", fontSize = 20.sp)
+                Text(text = "Help", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
             MyDialog(showDialog, { showDialog = false }) { showDialog = false}
 

@@ -30,11 +30,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import java.util.Random
+
+
 
 @Composable
 fun Game(navController: NavController, selectedDifficulty: String) {
@@ -155,6 +159,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         Text(
             text = palabraOculta,
             fontSize = 80.sp,
+            fontFamily = customFontFamily1,
             modifier = Modifier.padding(bottom = 30.dp)
         )
 
@@ -218,7 +223,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                 contentPadding = PaddingValues(0.dp),
                                 enabled = isButtonEnabled
                             ) {
-                                Text(text = letra, fontSize = 15.sp, color = Color.LightGray)
+                                Text(text = letra, fontSize = 15.sp, fontFamily = customFontFamily1, color = Color.LightGray)
                             }
                             if (j < 6) Spacer(modifier = Modifier.width(15.dp))
                         }
@@ -250,6 +255,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         Text(
             text = "ERRORES: $attempts",
             fontSize = 24.sp,
+            fontFamily = customFontFamily1,
             modifier = Modifier.padding(top = 15.dp)
         )
 
@@ -258,6 +264,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
 
 fun generarPalabraOculta(selectedDifficulty: String): String {
+
     return when (selectedDifficulty) {
         "Easy" -> "_ _ _"
         "Medium" -> "_ _ _ _"

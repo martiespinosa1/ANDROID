@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -83,7 +84,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallo
                 modifier = Modifier.requiredWidth(280.dp),
                 colors = buttonColor
             ) {
-                Text(text = "Play again", fontSize = 20.sp)
+                Text(text = "Play again", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -100,7 +101,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallo
                 modifier = Modifier.requiredWidth(280.dp),
                 colors = buttonColor
             ) {
-                Text(text = "Menu", fontSize = 20.sp)
+                Text(text = "Menu", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
         }
     }
