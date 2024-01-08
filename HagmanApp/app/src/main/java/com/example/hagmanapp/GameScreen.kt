@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -30,8 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -120,10 +117,10 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var randomWord by remember { mutableStateOf("") }
     var palabraOculta by remember { mutableStateOf(generarPalabraOculta(selectedDifficulty)) }
     val random = Random()
-    var attempts by remember { mutableIntStateOf(0) }
+    var attempts by remember { mutableIntStateOf(9) }
 
     Image(
-        painter = painterResource(id = R.drawable.fondo),
+        painter = painterResource(id = R.drawable.gris),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -140,15 +137,15 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
         if (!randomWordInitialized) {
             when (selectedDifficulty) {
-                "Easy" -> {
+                "FÁCIL" -> {
                     randomIndex = random.nextInt(palabras3Letras.size)
                     randomWord = palabras3Letras[randomIndex]
                 }
-                "Medium" -> {
+                "MEDIO" -> {
                     randomIndex = random.nextInt(palabras4Letras.size)
                     randomWord = palabras4Letras[randomIndex]
                 }
-                "Hard" -> {
+                "DIFÍCIL" -> {
                     randomIndex = random.nextInt(palabras5Letras.size)
                     randomWord = palabras5Letras[randomIndex]
                 }
@@ -166,14 +163,14 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
-            painter = painterResource(hangmanArray[attempts]),
+            painter = painterResource(hangmanArray[9 - attempts]),
             contentDescription = "hangman",
             modifier = Modifier.requiredSize(200.dp)
         )
 
         val buttonColor = ButtonDefaults.buttonColors(
-            containerColor = Color.DarkGray.copy(alpha = 0.8f),
-            contentColor = MaterialTheme.colorScheme.surface
+            containerColor = Color(.25f, 0.25f, 0.25f), // Gris oscuro
+            contentColor = Color(.75f, 0.75f, 0.75f) // Gris claro
         )
 
         // CREACION DE LOS BOTONES (TECLAS)
@@ -208,8 +205,8 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                                 showCongratsMessage = true
                                             }
                                         } else {
-                                            attempts++
-                                            if (attempts == 9) {
+                                            attempts--
+                                            if (attempts == 0) {
                                                 isGameOver = true
                                             }
                                         }
@@ -218,7 +215,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                         isButtonEnabled = false
                                     }
                                 },
-                                modifier = Modifier.size(45.dp),
+                                modifier = Modifier.size(50.dp),
                                 colors = buttonColor,
                                 shape = MaterialTheme.shapes.medium.copy(CornerSize(10.dp)),
                                 contentPadding = PaddingValues(0.dp),
@@ -254,7 +251,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         }
 
         Text(
-            text = "ERRORES: $attempts",
+            text = "INTENTOS RESTANTES: $attempts",
             fontSize = 24.sp,
             fontFamily = customFontFamily1,
             modifier = Modifier.padding(top = 15.dp)
@@ -267,9 +264,9 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 fun generarPalabraOculta(selectedDifficulty: String): String {
 
     return when (selectedDifficulty) {
-        "Easy" -> "_ _ _"
-        "Medium" -> "_ _ _ _"
-        "Hard" -> "_ _ _ _ _"
+        "FÁCIL" -> "_ _ _"
+        "MEDIO" -> "_ _ _ _"
+        "DIFÍCIL" -> "_ _ _ _ _"
         else -> ""
     }
 }
