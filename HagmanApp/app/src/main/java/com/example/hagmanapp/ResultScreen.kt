@@ -41,26 +41,30 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallo
         if (hasWon) {
             Text(
                 text = "¡Has ganado!",
-                fontSize = 24.sp,
+                fontSize = 30.sp,
+                fontFamily = customFontFamily1,
                 color = Color.Green,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 text = "Con $fallos intentos",
-                fontSize = 18.sp,
+                fontSize = 25.sp,
+                fontFamily = customFontFamily1,
                 color = Color.Green,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         } else {
             Text(
                 "¡Has perdido!",
-                fontSize = 24.sp,
+                fontSize = 30.sp,
+                fontFamily = customFontFamily1,
                 color = Color.Red,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 "La palabra era: ${palabra.uppercase()}",
-                fontSize = 18.sp,
+                fontSize = 25.sp,
+                fontFamily = customFontFamily1,
                 color = Color.Red,
                 modifier = Modifier.padding(bottom = 16.dp)
             )

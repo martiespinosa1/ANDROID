@@ -123,7 +123,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var attempts by remember { mutableIntStateOf(0) }
 
     Image(
-        painter = painterResource(id = R.drawable.fondo2),
+        painter = painterResource(id = R.drawable.fondo),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -158,14 +158,15 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
         Text(
             text = palabraOculta,
-            fontSize = 80.sp,
+            fontSize = 70.sp,
             fontFamily = customFontFamily1,
             modifier = Modifier.padding(bottom = 30.dp)
         )
 
+        val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
-            painter = painterResource(id = R.drawable.hang),
+            painter = painterResource(hangmanArray[attempts]),
             contentDescription = "hangman",
             modifier = Modifier.requiredSize(200.dp)
         )

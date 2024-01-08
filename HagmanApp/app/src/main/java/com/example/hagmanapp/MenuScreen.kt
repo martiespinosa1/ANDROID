@@ -87,6 +87,8 @@ fun Menu(navController: NavController) {
             contentColor = Color.LightGray
         )
 
+
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -106,17 +108,21 @@ fun Menu(navController: NavController) {
             )
             DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
+                modifier = Modifier
+                    .padding(8.dp)
+                    .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(16.dp))
             ) {
                 difficulty.forEach {
                     DropdownMenuItem(text = { Text(text = it, fontFamily = customFontFamily1)},
                         onClick = {
                             expanded = false
                             selectedDifficulty = it
-                    })
+                        })
                 }
             }
         }
+
 
 
         Row(
@@ -131,7 +137,7 @@ fun Menu(navController: NavController) {
                 modifier = Modifier.requiredWidth(280.dp),
                 colors = buttonColor
             ){
-                Text(text = "Play", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "P L A Y", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -147,7 +153,7 @@ fun Menu(navController: NavController) {
                 modifier = Modifier.requiredWidth(280.dp),
                 colors = buttonColor
             ){
-                Text(text = "Help", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "H E L P", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
             MyDialog(showDialog, { showDialog = false }) { showDialog = false}
 
