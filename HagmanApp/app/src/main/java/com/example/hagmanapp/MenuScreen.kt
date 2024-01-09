@@ -57,7 +57,7 @@ fun Menu(navController: NavController) {
     var showDialog by remember { mutableStateOf(false) }
 
     Image(
-        painter = painterResource(id = R.drawable.gris),
+        painter = painterResource(id = R.drawable.fondo2),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -188,7 +188,7 @@ fun MyDialog(show: Boolean, onDismiss: () -> Unit, function: () -> Unit) {
                     modifier = Modifier.padding(24.dp),
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Text(text = "Descubre la palabra oculta antes de que se complete el dibujo del ahorcado.\n\nToca las letras para adivinar y evita cometer 9 errores.\n\n¡Buena suerte!", color = Color.LightGray)
+                    Text(text = "Descubre la palabra oculta antes de que se complete el dibujo del ahorcado.\n\nToca las letras para adivinar y evita cometer 9 errores.\n\n¡Buena suerte!", color = Color.LightGray, fontFamily = customFontFamily2)
                 }
             }
         }

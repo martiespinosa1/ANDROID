@@ -61,7 +61,7 @@ fun Splash(alphaAnim: Float) {
         Text(
             text = "Hangman App",
             fontSize = 40.sp,
-            fontFamily = customFontFamily1,
+            fontFamily = customFontFamily2,
             color = colorGrisClaro,
             modifier = Modifier.padding(top = 150.dp).alpha(alphaAnim)
         )

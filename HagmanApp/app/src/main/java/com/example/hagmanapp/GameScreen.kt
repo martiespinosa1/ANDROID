@@ -121,7 +121,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var fallos by remember { mutableStateOf(0) }
 
     Image(
-        painter = painterResource(id = R.drawable.gris),
+        painter = painterResource(id = R.drawable.fondo2),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -161,7 +161,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             modifier = Modifier.padding(bottom = 30.dp)
         )
 
-        val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
+        val hangmanArray = arrayOf(R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
             painter = painterResource(hangmanArray[fallos]),
@@ -208,7 +208,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                             }
                                         } else {
                                             fallos++
-                                            if (fallos == 9) {
+                                            if (fallos == 5) {
                                                 isGameOver = true
                                             }
                                         }
@@ -238,7 +238,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                 delay(1000)
 
                 // Determinar si el juego se ganó o se perdió
-                val hasWon = !palabraOculta.contains("_") && fallos < 9
+                val hasWon = !palabraOculta.contains("_") && fallos < 5
 
                 // Navegar a ResultScreen con el resultado
                 navController.navigate(

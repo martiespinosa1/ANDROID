@@ -25,12 +25,12 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun Result(navController: NavController, hasWon: Boolean, palabra: String, intentos: Int, fallos: Int, diff: String) {
-    val colorRojo = Color(1f, .25f, .25f) // Rojo
-    val colorVerde = Color(.25f, 1f, .25f) // Verde
-    val colorAzul = Color(.25f, .25f, 1f) // Azul
+    val colorRojo = Color(1f, .35f, .35f) // Rojo
+    val colorVerde = Color(.35f, 1f, .35f) // Verde
+    val colorAzul = Color(.35f, .35f, 1f) // Azul
 
     Image(
-        painter = painterResource(id = R.drawable.gris),
+        painter = painterResource(id = R.drawable.fondo2),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -43,7 +43,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
+        val hangmanArray = arrayOf(R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
             painter = painterResource(hangmanArray[fallos]),
@@ -55,14 +55,14 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
             Text(
                 text = "¡Has ganado!",
                 fontSize = 40.sp,
-                fontFamily = customFontFamily1,
+                fontFamily = customFontFamily2,
                 color = colorVerde,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 text = "Con $intentos intentos",
                 fontSize = 25.sp,
-                fontFamily = customFontFamily1,
+                fontFamily = customFontFamily2,
                 color = colorVerde,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
@@ -70,21 +70,22 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
             Text(
                 "¡Has perdido!",
                 fontSize = 40.sp,
-                fontFamily = customFontFamily1,
+                fontFamily = customFontFamily2,
                 color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 "La palabra era: ",
                 fontSize = 25.sp,
-                fontFamily = customFontFamily1,
+                fontFamily = customFontFamily2,
                 color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
+            val letrasSeparadas = palabra.toCharArray().joinToString(" ")
             Text(
-                "${palabra.uppercase()}",
+                "${letrasSeparadas.uppercase()}",
                 fontSize = 65.sp,
-                fontFamily = customFontFamily1,
+                fontFamily = customFontFamily2,
                 color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
