@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,11 +44,11 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Menu(navController: NavController) {
-    val colorGrisOscuro = Color(.25f, 0.25f, 0.25f) // Gris oscuro
-    val colorGrisClaro = Color(.75f, 0.75f, 0.75f) // Gris claro
+    val colorGrisOscuro = Color(.15f, .15f, .15f) // Gris oscuro
+    val colorGrisClaro = Color(.85f, .85f, .85f) // Gris claro
 
     var expanded by remember { mutableStateOf(false) }
-    val difficulty = listOf("FÁCIL", "MEDIO", "DIFÍCIL")
+    val difficulty = listOf("F Á C I L", "M E D I O", "D I F Í C I L")
     var selectedDifficulty by remember { mutableStateOf(difficulty[0]) }
 
     var showDialog by remember { mutableStateOf(false) }
@@ -73,7 +74,7 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo),
+                painter = painterResource(id = R.drawable.hangman9),
                 contentDescription = "logo",
                 modifier = Modifier
                     .requiredSize(200.dp)
@@ -82,9 +83,9 @@ fun Menu(navController: NavController) {
         }
 
         val buttonColor = ButtonDefaults.buttonColors(
-            containerColor = Color(.25f, 0.25f, 0.25f), // Gris oscuro
+            containerColor = Color(.15f, 0.15f, 0.15f), // Gris oscuro
             //contentColor = MaterialTheme.colorScheme.surface
-            contentColor = Color(.75f, 0.75f, 0.75f) // Gris claro
+            contentColor = Color(.85f, 0.85f, 0.85f) // Gris claro
         )
 
 
@@ -97,14 +98,16 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedTextField(
-                value = "MODO: $selectedDifficulty",
-                textStyle = TextStyle(fontFamily = customFontFamily1, fontSize = 25.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
+                value = "M O D O:  $selectedDifficulty",
+                textStyle = TextStyle(fontFamily = customFontFamily1, fontSize = 20.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
                 onValueChange = { selectedDifficulty = it },
                 enabled = false,
                 readOnly = true,
                 modifier = Modifier
                     .clickable { expanded = true }
                     .background(colorGrisOscuro.copy(alpha = 0.8f), shape = RoundedCornerShape(50.dp))
+                    .requiredWidth(220.dp)
+                    .requiredHeight(60.dp)
             )
             DropdownMenu(
                 expanded = expanded,

@@ -137,15 +137,15 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
         if (!randomWordInitialized) {
             when (selectedDifficulty) {
-                "FÁCIL" -> {
+                "F Á C I L" -> {
                     randomIndex = random.nextInt(palabras3Letras.size)
                     randomWord = palabras3Letras[randomIndex]
                 }
-                "MEDIO" -> {
+                "M E D I O" -> {
                     randomIndex = random.nextInt(palabras4Letras.size)
                     randomWord = palabras4Letras[randomIndex]
                 }
-                "DIFÍCIL" -> {
+                "D I F Í C I L" -> {
                     randomIndex = random.nextInt(palabras5Letras.size)
                     randomWord = palabras5Letras[randomIndex]
                 }
@@ -169,8 +169,8 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         )
 
         val buttonColor = ButtonDefaults.buttonColors(
-            containerColor = Color(.25f, 0.25f, 0.25f), // Gris oscuro
-            contentColor = Color(.75f, 0.75f, 0.75f) // Gris claro
+            containerColor = Color(.15f, .15f, .15f), // Gris oscuro
+            contentColor = Color(.85f, .85f, .85f) // Gris claro
         )
 
         // CREACION DE LOS BOTONES (TECLAS)
@@ -264,9 +264,9 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 fun generarPalabraOculta(selectedDifficulty: String): String {
 
     return when (selectedDifficulty) {
-        "FÁCIL" -> "_ _ _"
-        "MEDIO" -> "_ _ _ _"
-        "DIFÍCIL" -> "_ _ _ _ _"
+        "F Á C I L" -> "_ _ _"
+        "M E D I O" -> "_ _ _ _"
+        "D I F Í C I L" -> "_ _ _ _ _"
         else -> ""
     }
 }

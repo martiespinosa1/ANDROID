@@ -24,9 +24,9 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallos: Int, diff: String) {
-    val colorRojo = Color(1f, 0.25f, 0.25f) // Rojo
-    val colorVerde = Color(0.25f, 1f, 0.25f) // Verde
-    val colorAzul = Color(0.25f, 0.25f, 1f) // Azul
+    val colorRojo = Color(1f, .25f, .25f) // Rojo
+    val colorVerde = Color(.25f, 1f, .25f) // Verde
+    val colorAzul = Color(.25f, .25f, 1f) // Azul
 
     Image(
         painter = painterResource(id = R.drawable.gris),
@@ -45,7 +45,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallo
         if (hasWon) {
             Text(
                 text = "¡Has ganado!",
-                fontSize = 30.sp,
+                fontSize = 40.sp,
                 fontFamily = customFontFamily1,
                 color = colorVerde,
                 modifier = Modifier.padding(bottom = 16.dp)
@@ -60,14 +60,21 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallo
         } else {
             Text(
                 "¡Has perdido!",
-                fontSize = 30.sp,
+                fontSize = 40.sp,
                 fontFamily = customFontFamily1,
                 color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
-                "La palabra era: ${palabra.uppercase()}",
+                "La palabra era: ",
                 fontSize = 25.sp,
+                fontFamily = customFontFamily1,
+                color = colorRojo,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            Text(
+                "${palabra.uppercase()}",
+                fontSize = 65.sp,
                 fontFamily = customFontFamily1,
                 color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
