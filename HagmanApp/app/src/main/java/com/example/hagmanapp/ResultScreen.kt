@@ -14,18 +14,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallos: Int, diff: String) {
+    val colorRojo = Color(1f, 0.25f, 0.25f) // Rojo
+    val colorVerde = Color(0.25f, 1f, 0.25f) // Verde
+    val colorAzul = Color(0.25f, 0.25f, 1f) // Azul
+
     Image(
-        painter = painterResource(id = R.drawable.fondo2),
+        painter = painterResource(id = R.drawable.gris),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -41,27 +45,31 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, fallo
         if (hasWon) {
             Text(
                 text = "¡Has ganado!",
-                fontSize = 24.sp,
-                color = Color.Green,
+                fontSize = 30.sp,
+                fontFamily = customFontFamily1,
+                color = colorVerde,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
-                text = "Con $fallos intentos",
-                fontSize = 18.sp,
-                color = Color.Green,
+                text = "Con $fallos intentos restantes",
+                fontSize = 25.sp,
+                fontFamily = customFontFamily1,
+                color = colorVerde,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         } else {
             Text(
                 "¡Has perdido!",
-                fontSize = 24.sp,
-                color = Color.Red,
+                fontSize = 30.sp,
+                fontFamily = customFontFamily1,
+                color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 "La palabra era: ${palabra.uppercase()}",
-                fontSize = 18.sp,
-                color = Color.Red,
+                fontSize = 25.sp,
+                fontFamily = customFontFamily1,
+                color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         }

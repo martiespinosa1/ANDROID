@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -45,15 +43,17 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Menu(navController: NavController) {
+    val colorGrisOscuro = Color(.25f, 0.25f, 0.25f) // Gris oscuro
+    val colorGrisClaro = Color(.75f, 0.75f, 0.75f) // Gris claro
+
     var expanded by remember { mutableStateOf(false) }
-    val difficulty = listOf("Easy", "Medium", "Hard")
+    val difficulty = listOf("FÁCIL", "MEDIO", "DIFÍCIL")
     var selectedDifficulty by remember { mutableStateOf(difficulty[0]) }
 
     var showDialog by remember { mutableStateOf(false) }
 
-
     Image(
-        painter = painterResource(id = R.drawable.fondo2),
+        painter = painterResource(id = R.drawable.gris),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -82,10 +82,12 @@ fun Menu(navController: NavController) {
         }
 
         val buttonColor = ButtonDefaults.buttonColors(
-            containerColor = Color.DarkGray.copy(alpha = 0.8f),
+            containerColor = Color(.25f, 0.25f, 0.25f), // Gris oscuro
             //contentColor = MaterialTheme.colorScheme.surface
-            contentColor = Color.LightGray
+            contentColor = Color(.75f, 0.75f, 0.75f) // Gris claro
         )
+
+
 
         Row(
             modifier = Modifier
@@ -95,28 +97,32 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedTextField(
-                value = "Difficulty: $selectedDifficulty",
+                value = "MODO: $selectedDifficulty",
                 textStyle = TextStyle(fontFamily = customFontFamily1, fontSize = 25.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
                 onValueChange = { selectedDifficulty = it },
                 enabled = false,
                 readOnly = true,
                 modifier = Modifier
                     .clickable { expanded = true }
-                    .background(Color.DarkGray.copy(alpha = 0.8f), shape = RoundedCornerShape(50.dp))
+                    .background(colorGrisOscuro.copy(alpha = 0.8f), shape = RoundedCornerShape(50.dp))
             )
             DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
+                modifier = Modifier
+                    .padding(8.dp)
+                    .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(16.dp))
             ) {
                 difficulty.forEach {
                     DropdownMenuItem(text = { Text(text = it, fontFamily = customFontFamily1)},
                         onClick = {
                             expanded = false
                             selectedDifficulty = it
-                    })
+                        })
                 }
             }
         }
+
 
 
         Row(
@@ -128,10 +134,10 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty)) },
-                modifier = Modifier.requiredWidth(280.dp),
+                modifier = Modifier.requiredWidth(200.dp),
                 colors = buttonColor
             ){
-                Text(text = "Play", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "P L A Y", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -144,10 +150,10 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { showDialog = true },
-                modifier = Modifier.requiredWidth(280.dp),
+                modifier = Modifier.requiredWidth(200.dp),
                 colors = buttonColor
             ){
-                Text(text = "Help", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "H E L P", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
             }
             MyDialog(showDialog, { showDialog = false }) { showDialog = false}
 
