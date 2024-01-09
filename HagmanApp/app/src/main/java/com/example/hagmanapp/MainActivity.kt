@@ -49,6 +49,7 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(
                                 navArgument("hasWon") { type = NavType.BoolType },
                                 navArgument("palabra") { type = NavType.StringType },
+                                navArgument("intentos") { type = NavType.IntType },
                                 navArgument("fallos") { type = NavType.IntType }
                             )
                         ) {
@@ -57,6 +58,7 @@ class MainActivity : ComponentActivity() {
                                 navigationController,
                                 backStackEntry.arguments?.getBoolean("hasWon") ?: false,
                                 backStackEntry.arguments?.getString("palabra") ?: "",
+                                backStackEntry.arguments?.getInt("intentos") ?: 0,
                                 backStackEntry.arguments?.getInt("fallos") ?: 0,
                                 backStackEntry.arguments?.getString("diff") ?: "Medium"
                             )

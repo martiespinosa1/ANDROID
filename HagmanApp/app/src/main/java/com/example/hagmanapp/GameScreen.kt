@@ -80,15 +80,15 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             "sur",
             "uva",
             "rio",
-            "png",
-            "zip",
-            "pie"
+            "uña",
+            "pie",
+            "zip"
         )
     }
     val palabras4Letras = remember {
         listOf(
             "casa",
-            "auto",
+            "dado",
             "nube",
             "pino",
             "vino",
@@ -96,7 +96,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             "azul",
             "rojo",
             "flor",
-            "piso"
+            "gris"
         )
     }
     val palabras5Letras = remember {
@@ -117,7 +117,8 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var randomWord by remember { mutableStateOf("") }
     var palabraOculta by remember { mutableStateOf(generarPalabraOculta(selectedDifficulty)) }
     val random = Random()
-    var attempts by remember { mutableIntStateOf(9) }
+    var attempts by remember { mutableIntStateOf(0) }
+    var fallos by remember { mutableStateOf(0) }
 
     Image(
         painter = painterResource(id = R.drawable.gris),
@@ -163,7 +164,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
-            painter = painterResource(hangmanArray[9 - attempts]),
+            painter = painterResource(hangmanArray[fallos]),
             contentDescription = "hangman",
             modifier = Modifier.requiredSize(200.dp)
         )
@@ -196,6 +197,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                             OutlinedButton(
                                 onClick = {
                                     if (isButtonEnabled && !isGameOver) {
+                                        attempts++
                                         val letraEnPalabra = letraEnPalabra(randomWord, letra)
                                         if (letraEnPalabra) {
                                             palabraOculta = ponerLetras(randomWord, palabraOculta, letra)
@@ -205,8 +207,8 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                                 showCongratsMessage = true
                                             }
                                         } else {
-                                            attempts--
-                                            if (attempts == 0) {
+                                            fallos++
+                                            if (fallos == 9) {
                                                 isGameOver = true
                                             }
                                         }
@@ -236,14 +238,15 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                 delay(1000)
 
                 // Determinar si el juego se ganó o se perdió
-                val hasWon = !palabraOculta.contains("_") && attempts < 9
+                val hasWon = !palabraOculta.contains("_") && fallos < 9
 
                 // Navegar a ResultScreen con el resultado
                 navController.navigate(
                     Routes.Result.createRoute(
                         hasWon = hasWon,
                         palabra = randomWord,
-                        fallos = attempts,
+                        intentos = attempts,
+                        fallos = fallos,
                         diff = selectedDifficulty
                     )
                 )
@@ -251,7 +254,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
         }
 
         Text(
-            text = "INTENTOS RESTANTES: $attempts",
+            text = "INTENTOS: $attempts",
             fontSize = 24.sp,
             fontFamily = customFontFamily1,
             modifier = Modifier.padding(top = 15.dp)

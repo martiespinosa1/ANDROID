@@ -42,7 +42,7 @@ fun Splash(alphaAnim: Float) {
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.hangman9),
+            painter = painterResource(id = R.drawable.logo),
             contentDescription = "logo",
             alpha = alphaAnim,
             modifier = Modifier
@@ -53,7 +53,7 @@ fun Splash(alphaAnim: Float) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 90.dp, bottom = 30.dp),
+            .padding(top = 100.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

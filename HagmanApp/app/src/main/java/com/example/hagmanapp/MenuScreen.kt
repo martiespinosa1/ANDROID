@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -20,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -74,7 +77,7 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.hangman9),
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "logo",
                 modifier = Modifier
                     .requiredSize(200.dp)
@@ -83,7 +86,7 @@ fun Menu(navController: NavController) {
         }
 
         val buttonColor = ButtonDefaults.buttonColors(
-            containerColor = Color(.15f, 0.15f, 0.15f), // Gris oscuro
+            containerColor = Color(.15f, 0.15f, 0.15f).copy(alpha = 0.8f), // Gris oscuro
             //contentColor = MaterialTheme.colorScheme.surface
             contentColor = Color(.85f, 0.85f, 0.85f) // Gris claro
         )
@@ -176,19 +179,20 @@ fun MyDialog(show: Boolean, onDismiss: () -> Unit, function: () -> Unit) {
                 usePlatformDefaultWidth = false
             )
         ) {
-            Column(
-                Modifier
-                    .background(Color.DarkGray.copy(alpha = 0.8f))
-                    .padding(24.dp)
+            Surface(
+                modifier = Modifier.width(300.dp),
+
+                shape = RoundedCornerShape(size = 10.dp)
             ) {
-                Text(text = "Selecciona la dificultad y dale a play", color = Color.LightGray)
+                Column(
+                    modifier = Modifier.padding(24.dp),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Descubre la palabra oculta antes de que se complete el dibujo del ahorcado.\n\nToca las letras para adivinar y evita cometer 9 errores.\n\n¡Buena suerte!", color = Color.LightGray)
+                }
             }
         }
     }
 }
-
-
-
-
 
 
