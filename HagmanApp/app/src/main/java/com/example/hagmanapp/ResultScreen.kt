@@ -45,19 +45,19 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
     ) {
         val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
-        Image(
-            painter = painterResource(hangmanArray[fallos]),
-            contentDescription = "hangman",
-            modifier = Modifier.requiredSize(200.dp)
-        )
-
         if (hasWon) {
+            Image(
+                painter = painterResource(R.drawable.happy),
+                contentDescription = "win",
+                modifier = Modifier.requiredSize(200.dp)
+            )
+
             Text(
                 text = "¡Has ganado!",
                 fontSize = 40.sp,
                 fontFamily = customFontFamily2,
                 color = colorVerde,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(top = 25.dp, bottom = 16.dp)
             )
             Text(
                 text = "Con $intentos intentos",
@@ -67,12 +67,18 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         } else {
+            Image(
+                painter = painterResource(R.drawable.sad),
+                contentDescription = "lose",
+                modifier = Modifier.requiredSize(200.dp)
+            )
+
             Text(
                 "¡Has perdido!",
                 fontSize = 40.sp,
                 fontFamily = customFontFamily2,
                 color = colorRojo,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(top = 25.dp, bottom = 16.dp)
             )
             Text(
                 "La palabra era: ",
@@ -85,7 +91,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
             Text(
                 "${letrasSeparadas.uppercase()}",
                 fontSize = 65.sp,
-                fontFamily = customFontFamily2,
+                fontFamily = customFontFamily1,
                 color = colorRojo,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
@@ -100,16 +106,16 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 90.dp, bottom = 30.dp),
+                .padding(top = 30.dp, bottom = 30.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Game.createRoute(diff)) },
-                modifier = Modifier.requiredWidth(230.dp),
+                modifier = Modifier.requiredWidth(180.dp),
                 colors = buttonColor
             ) {
-                Text(text = "P L A Y   A G A I N", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
+                Text(text = "PLAY AGAIN", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -123,10 +129,10 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Menu.route) },
-                modifier = Modifier.requiredWidth(150.dp),
+                modifier = Modifier.requiredWidth(180.dp),
                 colors = buttonColor
             ) {
-                Text(text = "M E N U", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
+                Text(text = "MENU", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
         }
     }

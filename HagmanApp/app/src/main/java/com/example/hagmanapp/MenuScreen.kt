@@ -101,16 +101,16 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedTextField(
-                value = "MODO:  $selectedDifficulty",
+                value = "MODO: $selectedDifficulty",
                 textStyle = TextStyle(fontFamily = customFontFamily2, fontSize = 20.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
                 onValueChange = { selectedDifficulty = it },
                 enabled = false,
                 readOnly = true,
                 modifier = Modifier
                     .clickable { expanded = true }
-                    .background(colorGrisOscuro.copy(alpha = 0.8f), shape = RoundedCornerShape(30.dp))
+                    .background(colorGrisOscuro.copy(alpha = 0.8f), shape = RoundedCornerShape(10.dp))
                     .requiredWidth(200.dp)
-                    .requiredHeight(55.dp)
+                    .requiredHeight(60.dp)
             )
             DropdownMenu(
                 expanded = expanded,
@@ -140,10 +140,10 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty)) },
-                modifier = Modifier.requiredWidth(180.dp),
+                modifier = Modifier.requiredWidth(200.dp),
                 colors = buttonColor
             ){
-                Text(text = "P L A Y", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
+                Text(text = "PLAY", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -156,10 +156,10 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { showDialog = true },
-                modifier = Modifier.requiredWidth(180.dp),
+                modifier = Modifier.requiredWidth(200.dp),
                 colors = buttonColor
             ){
-                Text(text = "H E L P", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
+                Text(text = "HELP", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
             MyDialog(showDialog, { showDialog = false }) { showDialog = false}
 

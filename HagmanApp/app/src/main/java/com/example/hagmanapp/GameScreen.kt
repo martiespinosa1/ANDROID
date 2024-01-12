@@ -238,7 +238,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                 delay(1000)
 
                 // Determinar si el juego se ganó o se perdió
-                val hasWon = !palabraOculta.contains("_") && fallos < 5
+                val hasWon = !palabraOculta.contains("_") && fallos < 9
 
                 // Navegar a ResultScreen con el resultado
                 navController.navigate(
