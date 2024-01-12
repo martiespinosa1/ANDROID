@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 fun Result(navController: NavController, hasWon: Boolean, palabra: String, intentos: Int, fallos: Int, diff: String) {
     val colorRojo = Color(1f, .35f, .35f) // Rojo
     val colorVerde = Color(.35f, 1f, .35f) // Verde
-    val colorAzul = Color(.35f, .35f, 1f) // Azul
 
     Image(
         painter = painterResource(id = R.drawable.gris),
