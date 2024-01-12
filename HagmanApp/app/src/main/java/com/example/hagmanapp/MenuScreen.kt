@@ -51,13 +51,13 @@ fun Menu(navController: NavController) {
     val colorGrisClaro = Color(.85f, .85f, .85f) // Gris claro
 
     var expanded by remember { mutableStateOf(false) }
-    val difficulty = listOf("F Á C I L", "M E D I O", "D I F Í C I L")
-    var selectedDifficulty by remember { mutableStateOf(difficulty[0]) }
+    val difficulty = listOf("FÁCIL", "NORMAL", "DIFÍCIL")
+    var selectedDifficulty by remember { mutableStateOf(difficulty[1]) }
 
     var showDialog by remember { mutableStateOf(false) }
 
     Image(
-        painter = painterResource(id = R.drawable.fondo2),
+        painter = painterResource(id = R.drawable.gris),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -81,7 +81,7 @@ fun Menu(navController: NavController) {
                 contentDescription = "logo",
                 modifier = Modifier
                     .requiredSize(200.dp)
-                    .clip(shape = RoundedCornerShape(30.dp))
+                    .clip(shape = RoundedCornerShape(35.dp))
             )
         }
 
@@ -101,26 +101,26 @@ fun Menu(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedTextField(
-                value = "M O D O:  $selectedDifficulty",
-                textStyle = TextStyle(fontFamily = customFontFamily1, fontSize = 20.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
+                value = "MODO:  $selectedDifficulty",
+                textStyle = TextStyle(fontFamily = customFontFamily2, fontSize = 20.sp, color = Color.LightGray, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
                 onValueChange = { selectedDifficulty = it },
                 enabled = false,
                 readOnly = true,
                 modifier = Modifier
                     .clickable { expanded = true }
-                    .background(colorGrisOscuro.copy(alpha = 0.8f), shape = RoundedCornerShape(50.dp))
-                    .requiredWidth(220.dp)
-                    .requiredHeight(60.dp)
+                    .background(colorGrisOscuro.copy(alpha = 0.8f), shape = RoundedCornerShape(30.dp))
+                    .requiredWidth(200.dp)
+                    .requiredHeight(55.dp)
             )
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
                 modifier = Modifier
                     .padding(8.dp)
-                    .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(10.dp))
             ) {
                 difficulty.forEach {
-                    DropdownMenuItem(text = { Text(text = it, fontFamily = customFontFamily1)},
+                    DropdownMenuItem(text = { Text(text = it, fontFamily = customFontFamily2)},
                         onClick = {
                             expanded = false
                             selectedDifficulty = it
@@ -140,10 +140,10 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Game.createRoute(selectedDifficulty)) },
-                modifier = Modifier.requiredWidth(200.dp),
+                modifier = Modifier.requiredWidth(180.dp),
                 colors = buttonColor
             ){
-                Text(text = "P L A Y", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "P L A Y", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -156,10 +156,10 @@ fun Menu(navController: NavController) {
         ) {
             OutlinedButton(
                 onClick = { showDialog = true },
-                modifier = Modifier.requiredWidth(200.dp),
+                modifier = Modifier.requiredWidth(180.dp),
                 colors = buttonColor
             ){
-                Text(text = "H E L P", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "H E L P", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
             MyDialog(showDialog, { showDialog = false }) { showDialog = false}
 

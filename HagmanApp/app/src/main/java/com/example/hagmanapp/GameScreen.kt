@@ -121,7 +121,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
     var fallos by remember { mutableStateOf(0) }
 
     Image(
-        painter = painterResource(id = R.drawable.fondo2),
+        painter = painterResource(id = R.drawable.gris),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -138,15 +138,15 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
         if (!randomWordInitialized) {
             when (selectedDifficulty) {
-                "F Á C I L" -> {
+                "FÁCIL" -> {
                     randomIndex = random.nextInt(palabras3Letras.size)
                     randomWord = palabras3Letras[randomIndex]
                 }
-                "M E D I O" -> {
+                "NORMAL" -> {
                     randomIndex = random.nextInt(palabras4Letras.size)
                     randomWord = palabras4Letras[randomIndex]
                 }
-                "D I F Í C I L" -> {
+                "DIFÍCIL" -> {
                     randomIndex = random.nextInt(palabras5Letras.size)
                     randomWord = palabras5Letras[randomIndex]
                 }
@@ -156,12 +156,12 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 
         Text(
             text = palabraOculta,
-            fontSize = 70.sp,
+            fontSize = 65.sp,
             fontFamily = customFontFamily1,
             modifier = Modifier.padding(bottom = 30.dp)
         )
 
-        val hangmanArray = arrayOf(R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
+        val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
             painter = painterResource(hangmanArray[fallos]),
@@ -208,7 +208,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                                             }
                                         } else {
                                             fallos++
-                                            if (fallos == 5) {
+                                            if (fallos == 9) {
                                                 isGameOver = true
                                             }
                                         }
@@ -225,7 +225,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
                             ) {
                                 Text(text = letra, fontSize = 15.sp, fontFamily = customFontFamily1, color = Color.LightGray)
                             }
-                            if (j < 6) Spacer(modifier = Modifier.width(15.dp))
+                            if (j < 6) Spacer(modifier = Modifier.width(12.dp))
                         }
                     }
                 }
@@ -267,9 +267,9 @@ fun Game(navController: NavController, selectedDifficulty: String) {
 fun generarPalabraOculta(selectedDifficulty: String): String {
 
     return when (selectedDifficulty) {
-        "F Á C I L" -> "_ _ _"
-        "M E D I O" -> "_ _ _ _"
-        "D I F Í C I L" -> "_ _ _ _ _"
+        "FÁCIL" -> "_ _ _"
+        "NORMAL" -> "_ _ _ _"
+        "DIFÍCIL" -> "_ _ _ _ _"
         else -> ""
     }
 }

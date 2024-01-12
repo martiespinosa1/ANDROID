@@ -30,7 +30,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
     val colorAzul = Color(.35f, .35f, 1f) // Azul
 
     Image(
-        painter = painterResource(id = R.drawable.fondo2),
+        painter = painterResource(id = R.drawable.gris),
         contentDescription = "fondo",
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
@@ -43,7 +43,7 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val hangmanArray = arrayOf(R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
+        val hangmanArray = arrayOf(R.drawable.hangman0, R.drawable.hangman1, R.drawable.hangman2, R.drawable.hangman3, R.drawable.hangman4, R.drawable.hangman5, R.drawable.hangman6, R.drawable.hangman7, R.drawable.hangman8, R.drawable.hangman9)
 
         Image(
             painter = painterResource(hangmanArray[fallos]),
@@ -106,10 +106,10 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Game.createRoute(diff)) },
-                modifier = Modifier.requiredWidth(200.dp),
+                modifier = Modifier.requiredWidth(230.dp),
                 colors = buttonColor
             ) {
-                Text(text = "P L A Y   A G A I N", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "P L A Y   A G A I N", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -123,10 +123,10 @@ fun Result(navController: NavController, hasWon: Boolean, palabra: String, inten
         ) {
             OutlinedButton(
                 onClick = { navController.navigate(Routes.Menu.route) },
-                modifier = Modifier.requiredWidth(200.dp),
+                modifier = Modifier.requiredWidth(150.dp),
                 colors = buttonColor
             ) {
-                Text(text = "M E N U", fontSize = 20.sp, fontFamily = customFontFamily1, fontWeight = FontWeight.Bold)
+                Text(text = "M E N U", fontSize = 20.sp, fontFamily = customFontFamily2, fontWeight = FontWeight.Bold)
             }
         }
     }

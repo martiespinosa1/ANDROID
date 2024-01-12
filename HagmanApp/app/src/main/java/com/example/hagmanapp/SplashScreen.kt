@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
@@ -23,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +38,13 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Splash(alphaAnim: Float) {
+    Image(
+        painter = painterResource(id = R.drawable.gris),
+        contentDescription = "fondo",
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop
+    )
+
     Column(modifier = Modifier.requiredSize(150.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -46,7 +55,7 @@ fun Splash(alphaAnim: Float) {
             contentDescription = "logo",
             alpha = alphaAnim,
             modifier = Modifier
-                .clip(shape = RoundedCornerShape(20.dp))
+                .clip(shape = RoundedCornerShape(25.dp))
         )
     }
 
@@ -60,7 +69,7 @@ fun Splash(alphaAnim: Float) {
         val colorGrisClaro = Color(.75f, 0.75f, 0.75f) // Gris claro
         Text(
             text = "Hangman App",
-            fontSize = 40.sp,
+            fontSize = 33.sp,
             fontFamily = customFontFamily2,
             color = colorGrisClaro,
             modifier = Modifier.padding(top = 150.dp).alpha(alphaAnim)
