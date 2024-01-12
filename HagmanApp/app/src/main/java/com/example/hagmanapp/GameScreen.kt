@@ -77,12 +77,12 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             "pan",
             "luz",
             "mar",
-            "sur",
             "uva",
             "rio",
-            "uña",
-            "pie",
-            "zip"
+            "oro",
+            "ley",
+            "voz",
+            "sal"
         )
     }
     val palabras4Letras = remember {
@@ -90,7 +90,7 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             "casa",
             "dado",
             "nube",
-            "pino",
+            "pato",
             "vino",
             "moto",
             "azul",
@@ -104,10 +104,10 @@ fun Game(navController: NavController, selectedDifficulty: String) {
             "valor",
             "libro",
             "cielo",
-            "perro",
+            "reloj",
             "tigre",
             "pilar",
-            "silla",
+            "verde",
             "yegua",
             "nieve",
             "casco"
